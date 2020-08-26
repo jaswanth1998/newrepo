@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:getit/screens/Home/myAppotiments.dart';
 import 'package:getit/screens/Registration/registrationOfUser.dart';
+import 'package:getit/screens/contact/contact.dart';
 import 'package:getit/screens/editprofile/EditProfile.dart';
 import 'package:getit/services/authService.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -95,6 +96,24 @@ setData.then(
               MaterialPageRoute(
                 builder: (context) => EditProfile(
                   userid: this.widget.userId,
+                ),
+                // settings: RouteSettings(
+                //   arguments: [catgary[index],this.userid],
+                // ),
+              ),
+            );
+            // Update the state of the app.
+            // ...
+          },
+        ),
+         ListTile(
+          title: Text('Contact Us'),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ContactUser(
+                  
                 ),
                 // settings: RouteSettings(
                 //   arguments: [catgary[index],this.userid],

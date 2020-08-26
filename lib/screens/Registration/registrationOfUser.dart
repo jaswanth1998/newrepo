@@ -10,11 +10,11 @@ class RegistrationOfUser extends StatefulWidget {
   RegistrationOfUser({this.uid});
 
   @override
-  _RegistrationOfUserState createState() => _RegistrationOfUserState(uid: this.uid);
+  _RegistrationOfUserState createState() =>
+      _RegistrationOfUserState(uid: this.uid);
 }
 
 class _RegistrationOfUserState extends State<RegistrationOfUser> {
-  
   String firstName;
 
   String lastName;
@@ -23,27 +23,25 @@ class _RegistrationOfUserState extends State<RegistrationOfUser> {
 
   String gender = "Male";
 
-  String city;
+  // String city;
 
   String phoneNum;
-    String uid;
+  String uid;
 
-    String userNotificationToken = "";
+  String userNotificationToken = "";
+  String city = 'Kadapa';
 
   _RegistrationOfUserState({this.uid});
 
   @override
   Widget build(BuildContext context) {
     final _formkey5 = GlobalKey<FormState>();
-    
-     Future<SharedPreferences> setData = SharedPreferences.getInstance();
+
+    Future<SharedPreferences> setData = SharedPreferences.getInstance();
     setData.then((data) => {
           this.userNotificationToken = data.getString("User Notification Token")
         });
-    return 
-    
-    
-    SingleChildScrollView(
+    return SingleChildScrollView(
       child: Column(
         children: <Widget>[
           Container(
@@ -81,7 +79,10 @@ class _RegistrationOfUserState extends State<RegistrationOfUser> {
                           val.length <= 1 ? 'Enter Last Name' : null,
                     ),
                     SizedBox(height: 10),
-                    DropdownButton<String>(
+                    Row(children: <Widget>[
+                      Expanded(child: Text("Gender")),
+                      Expanded(child:
+                       DropdownButton<String>(
                       value: gender,
                       // icon: Icon(Icons.arrow_downward),
                       // iconSize: 24,
@@ -106,7 +107,43 @@ class _RegistrationOfUserState extends State<RegistrationOfUser> {
                         );
                       }).toList(),
                     ),
+                      ),
+                    ],),
+                   
                     SizedBox(height: 10),
+
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Text("Select city"),
+                        ),
+                        Expanded(
+                          child: DropdownButton<String>(
+                            value: city,
+                            icon: Icon(Icons.arrow_downward),
+                            iconSize: 24,
+                            elevation: 16,
+                            style: TextStyle(color: Colors.deepPurple),
+                            underline: Container(
+                              height: 2,
+                              color: Colors.deepPurpleAccent,
+                            ),
+                            onChanged: (String newValue) {
+                              setState(() {
+                                city = newValue;
+                              });
+                            },
+                            items: <String>['Kadapa', 'mydukur', 'proddatur']
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          ),
+                        )
+                      ],
+                    ),
                     TextFormField(
                       decoration: textInputDecarator.copyWith(hintText: "age"),
                       validator: (val) => val.length > 2 || val.length == 0
@@ -128,13 +165,14 @@ class _RegistrationOfUserState extends State<RegistrationOfUser> {
                     //   validator: (val) =>
                     //       val.length <= 1 ? 'Enter Gender' : null,
                     // ),
-                    TextFormField(
-                      decoration: textInputDecarator.copyWith(hintText: "City"),
-                      onChanged: (val) {
-                        this.city = val;
-                      },
-                      validator: (val) => val.length <= 1 ? 'Enter City' : null,
-                    ),
+
+                    // TextFormField(
+                    //   decoration: textInputDecarator.copyWith(hintText: "City"),
+                    //   onChanged: (val) {
+                    //     this.city = val;
+                    //   },
+                    //   validator: (val) => val.length <= 1 ? 'Enter City' : null,
+                    // ),
                     SizedBox(height: 10),
                     TextFormField(
                       keyboardType: TextInputType.number,

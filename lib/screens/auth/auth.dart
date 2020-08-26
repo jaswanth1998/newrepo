@@ -19,13 +19,11 @@ class _AuthState extends State<Auth> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-           decoration: BoxDecoration(
-          color : Color.fromRGBO(41, 152, 255, 0.8100000023841858),
-  ),
+        decoration: BoxDecoration(
+          color: Color.fromRGBO(41, 152, 255, 0.8100000023841858),
+        ),
         child: Column(
           children: <Widget>[
-           
-           
             SizedBox(height: 40),
             Text(
               "Welcome to  Doctor's Token",
@@ -42,22 +40,27 @@ class _AuthState extends State<Auth> {
             // margin: EdgeInsets.all(20),
 
             children: <Widget>[
-             startlog? Center(
-               child: Column(children: <Widget>[
-                  RaisedButton(child: Text("Login"), onPressed: () {
-                    setState(() {
-                      this.startlog = false;
-                    });
-                  }),
-                  RaisedButton(child: Text("Register"), onPressed: () {
- setState(() {
-                      this.startlog = false;
-                      this.checkLogin = false;
-                    });
-                  }),
-                ]),
-             ):
-              checkLogin?DisplayFrom():RegisterFromAuth()
+              startlog
+                  ? Center(
+                      child: Column(children: <Widget>[
+                        RaisedButton(
+                            child: Text("Login"),
+                            onPressed: () {
+                              setState(() {
+                                this.startlog = false;
+                              });
+                            }),
+                        RaisedButton(
+                            child: Text("Register"),
+                            onPressed: () {
+                              setState(() {
+                                this.startlog = false;
+                                this.checkLogin = false;
+                              });
+                            }),
+                      ]),
+                    )
+                  : checkLogin ? DisplayFrom() : RegisterFromAuth()
             ]),
       ),
     );

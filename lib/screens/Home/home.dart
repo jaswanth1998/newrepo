@@ -88,6 +88,8 @@ class _HomeState extends State<Home> {
                 return Catgagery(
                   userid: this.userid,
                   userName: snapshot.data.data["first Name"],
+                  sarchCity: snapshot.data.data["city"],
+
                 );
               } else {
                 return RegistrationOfUser(uid: this.userid);

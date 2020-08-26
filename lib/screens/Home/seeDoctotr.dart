@@ -9,17 +9,22 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class SeeDoctor extends StatefulWidget {
   String userid;
   String searchcat;
+  String searchCity;
 
-  SeeDoctor({this.userid,this.searchcat});
+  SeeDoctor({this.userid, this.searchcat, this.searchCity});
   @override
-  _SeeDoctorState createState() => _SeeDoctorState(userid: this.userid,searchcat: this.searchcat);
+  _SeeDoctorState createState() => _SeeDoctorState(
+      userid: this.userid,
+      searchcat: this.searchcat,
+      searchCity: this.searchCity);
 }
 
 class _SeeDoctorState extends State<SeeDoctor> {
   String userid;
   String searchcat;
+  String searchCity;
 
-  _SeeDoctorState({this.userid,this.searchcat});
+  _SeeDoctorState({this.userid, this.searchcat, this.searchCity});
 
   // final brews = Provider.of<List<Brew>>(context)??[];
   List<DoctorUserModel> data;
@@ -48,35 +53,36 @@ class _SeeDoctorState extends State<SeeDoctor> {
               .where(
                 "Doctor",
                 isEqualTo: true,
-              ).where("specialization",isEqualTo:this.searchcat).where("leave",isEqualTo:false)
+              )
+              .where("specialization", isEqualTo: this.searchcat)
+              .where("leave", isEqualTo: false)
+              .where("city", isEqualTo: this.searchCity)
               .snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (snapshot.connectionState  == ConnectionState.waiting )  {
+            if (snapshot.connectionState == ConnectionState.waiting) {
               print("Loading");
               return Text("Loading");
             }
-            if(snapshot.data.documents.length ==0 ){
-                print("Loading");
+            if (snapshot.data.documents.length == 0) {
+              print("Loading");
               return Center(child: Text("No Doctors available"));
-
             }
             var userDocument = snapshot;
 
             this.data = (userDocument.data.documents.map((useData) {
               return DoctorUserModel(
-                doctorDocumentId: useData.documentID,
-                age: useData["Age"],
-                experience: useData["Experience"],
-                firstname: useData["First name"],
-                lastName: useData["Last Name"],
-                uID: useData["UID"],
-                hospital: useData["Hospital"],
-                city: useData["city"],
-                phoneNo: useData["phone"],
-                specialization: useData["specialization"],
-                gender: useData["gender"],
-                qualificition :useData["Qualificition"]
-              );
+                  doctorDocumentId: useData.documentID,
+                  age: useData["Age"],
+                  experience: useData["Experience"],
+                  firstname: useData["First name"],
+                  lastName: useData["Last Name"],
+                  uID: useData["UID"],
+                  hospital: useData["Hospital"],
+                  city: useData["city"],
+                  phoneNo: useData["phone"],
+                  specialization: useData["specialization"],
+                  gender: useData["gender"],
+                  qualificition: useData["Qualificition"]);
             })).toList();
 
             return SingleChildScrollView(

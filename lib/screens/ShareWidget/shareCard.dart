@@ -27,16 +27,12 @@ class ShareCard extends StatelessWidget {
                 Container(
                     width: double.infinity,
                     height: 150,
-                    child: 
-                    Center(child:
-                    
-                    
-                    useModel.gender=="Male"? Image.asset('assests/boydoctor.png'):Image.asset('assests/grildoctor.jpeg')
+                    child: Center(
+                        child: useModel.gender == "Male"
+                            ? Image.asset('assests/boydoctor.png')
+                            : Image.asset('assests/grildoctor.jpeg')
                         //  Image(image: AssetImage("assests/cardDoctor.svg"))
-                        )
-                        )
-                        
-                        ,
+                        )),
                 Container(
                     width: double.infinity,
                     height: 100,
@@ -44,7 +40,6 @@ class ShareCard extends StatelessWidget {
                       "\nName: " +
                           useModel.firstname +
                           "" +
-
                           "\nQualification: " +
                           useModel.qualificition +
                           "\n" +
@@ -96,8 +91,10 @@ class ShareCard extends StatelessWidget {
                                                 doctorUid: this
                                                     .useModel
                                                     .doctorDocumentId,
-                                                doctorNum: this.useModel.phoneNo,
-                                                patientName: this.sendPatientName,
+                                                doctorNum:
+                                                    this.useModel.phoneNo,
+                                                patientName:
+                                                    this.sendPatientName,
                                                 patientNum:
                                                     this.sendPatientPhoneNum,
                                                 patientUid: this.sendPatientUid,
@@ -113,9 +110,7 @@ class ShareCard extends StatelessWidget {
                           //         useModel.doctorDocumentId,
                           //         useModel.firstname,
                           //         this.userId);
-                        }
-                        
-                        ),
+                        }),
                   ],
                 )
               ],

@@ -69,7 +69,7 @@ class _RegisterFromAuthState extends State<RegisterFromAuth> {
                 // keyboardType: TextInputType.,
                 obscureText: true,
 
-                validator: (val) => val.length >= 1 ? null : "Enter Paasword",
+                validator: (val) => val.length >= 1 ? null : "Enter Password",
                 onChanged: (val) {
                   this.pass = val;
 
@@ -84,7 +84,7 @@ class _RegisterFromAuthState extends State<RegisterFromAuth> {
               TextFormField(
                 // decoration:  textInputDecarator.copyWith(hintText: "Password"),
                 decoration: InputDecoration(
-                  hintText: "Conform Password",
+                  hintText: "Confirm Password",
                   suffixIcon: IconButton(
                       icon: Icon(
                         Icons.remove_red_eye,
@@ -106,7 +106,7 @@ class _RegisterFromAuthState extends State<RegisterFromAuth> {
                 obscureText: this._showPassword,
 
                 validator: (val) =>
-                    val == this.pass ? null : "Password DoesNot match",
+                    val == this.pass ? null : "Password Does not match",
                 onChanged: (val) {
                   // this.paconfromPAssss = val;
 
@@ -141,7 +141,7 @@ class _RegisterFromAuthState extends State<RegisterFromAuth> {
                           // return result.user.uid;
                         } catch (e) {
                           print(
-                              "An error occured while trying to send email        verification");
+                              "An error occured while trying to send email   verification");
                           print(e);
                         }
 

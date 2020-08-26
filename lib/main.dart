@@ -53,7 +53,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return  MaterialApp(
-            // debugShowCheckedModeBanner: false,
+            debugShowCheckedModeBanner: false,
             // home: DetailsOfApp(),
         home:ShowSplash(),
           routes: <String, WidgetBuilder>{

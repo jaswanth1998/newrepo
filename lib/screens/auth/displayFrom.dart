@@ -83,7 +83,7 @@ class _DisplayFromState extends State<DisplayFrom> {
                       obscureText: !_showPassword,
 
                       validator: (val) =>
-                          val.length >= 1 ? null : "Enter Paasword",
+                          val.length >= 1 ? null : "Enter Password",
                       onChanged: (val) {
                         this.pass = val;
 
@@ -97,7 +97,7 @@ class _DisplayFromState extends State<DisplayFrom> {
               Container(
                 child: GestureDetector(
                   onTapDown: (tapDtails) => {
-                    print(" i am here"),
+                    
                     this.setState(() {
                       this.showPass = !this.showPass;
                       print(this.showPass);
@@ -106,7 +106,7 @@ class _DisplayFromState extends State<DisplayFrom> {
                   child: Container(
                       width: double.infinity,
                       child:
-                          Text("Forget Password", textAlign: TextAlign.start)),
+                          Text("Forgot Password", textAlign: TextAlign.start)),
                 ),
               ),
               SizedBox(
@@ -124,6 +124,7 @@ class _DisplayFromState extends State<DisplayFrom> {
                       onPressed: () async {
                         print(this.emailOfUser + this.pass);
                         print(_formkey100.currentState.validate());
+                      
                         if (_formkey100.currentState.validate()) {
                           final FirebaseAuth _auth = FirebaseAuth.instance;
                           try {
