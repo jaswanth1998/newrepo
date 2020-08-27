@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:getit/models/MainAppotimentModel.dart';
 import 'package:getit/screens/BookAppotiment/MainTranscation.dart';
 import 'package:getit/screens/BookAppotiment/UpiBookAppotiment.dart';
+import 'package:getit/screens/Home/myAppotiments.dart';
+import 'package:getit/services/database.dart';
 import 'package:upi_india/upi_india.dart';
+
+import 'package:razorpay_flutter/razorpay_flutter.dart';
+
+
+import 'package:flutter/services.dart';
+
+import 'package:razorpay_flutter/razorpay_flutter.dart';
+
+
 
 class DetailsOfApp extends StatefulWidget {
   MainAppotimentModel basicDetails;
@@ -13,14 +25,108 @@ class DetailsOfApp extends StatefulWidget {
 }
 
 class _DetailsOfAppState extends State<DetailsOfApp> {
+   static const platform = const MethodChannel("razorpay_flutter");
+
+  Razorpay _razorpay;
   // String selectedSlot = "Morning";
   String getDate = "";
   MainAppotimentModel basicDetails;
   bool isMorning = true;
   bool isMale = true;
+  
 
   _DetailsOfAppState({this.basicDetails});
   Future _transaction;
+
+
+
+ 
+
+
+
+ @override
+  void initState() {
+    super.initState();
+    _razorpay = Razorpay();
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _razorpay.clear();
+  }
+
+  void openCheckout(amount) async {
+    var options = {
+      'key': 'rzp_test_MjfjZVsokhFFbG',
+      'amount': amount,
+      'name': 'Acme Corp.',
+      'description': 'Fine T-Shirt',
+      'prefill': {'contact': '9160024989', 'email': 'jaswanthtata@gmail.com'},
+      'external': {
+        'wallets': ['paytm']
+      }
+    };
+
+    try {
+      
+      _razorpay.open(options);
+      print("sucess");
+    } catch (e) {
+      print("i am catch");
+      debugPrint(e);
+    }
+  }
+
+  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    print("i am sucess response");
+    print(response.paymentId);
+
+  DataBaseServices().mainTransactionOfAppotiment(
+     this.basicDetails.doctorUid,
+        this.basicDetails.doctorName,
+        this.basicDetails.patientUid,
+        this.basicDetails.patientName,
+        this.basicDetails.patientNum,
+        response.paymentId,
+        
+        
+        
+        
+        this.basicDetails.appotimentSlot,
+        this.basicDetails.patientAge,
+        this.basicDetails.patientGender,
+        
+  );
+   Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                
+                 MyAppotiments(
+                  userId: this.basicDetails.patientUid,
+                ),
+                // settings: RouteSettings(
+                //   arguments: [catgary[index],this.userid],
+                // ),
+              ),
+            );
+  
+  }
+
+  void _handlePaymentError(PaymentFailureResponse response) {
+    print("i am  response");
+   print(response);
+  }
+
+  void _handleExternalWallet(ExternalWalletResponse response) {
+    print("i am  handle response");
+print(response);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -258,13 +364,13 @@ class _DetailsOfAppState extends State<DetailsOfApp> {
                                   }else{
                                    this.basicDetails.appotimentSlot = "Evening"; 
                                   }
-
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => MainTranscation(
-                                                basicDetails: this.basicDetails,
-                                              )));
+                                  openCheckout(2000);
+                                  // Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //         builder: (context) => MainTranscation(
+                                  //               basicDetails: this.basicDetails,
+                                  //             )));
                                 }
                               },
                             ),
@@ -272,63 +378,13 @@ class _DetailsOfAppState extends State<DetailsOfApp> {
                     ],
                   ),
 
-                  // FutureBuilder(
-                  //     future: _transaction,
-                  //     builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  //       print(this._transaction);
-                  //       if (snapshot.connectionState ==
-                  //               ConnectionState.waiting ||
-                  //           snapshot.data == null) {
-                  //         return Text('Waiting for result');
-                  //       } else {
-                  //         switch (snapshot.data.toString()) {
-                  //           case UpiIndiaResponseError.APP_NOT_INSTALLED:
-                  //             return Text(
-                  //               'App not installed.',
-                  //             );
-                  //             break;
-                  //           case UpiIndiaResponseError.INVALID_PARAMETERS:
-                  //             return Text(
-                  //               'Requested payment is invalid.',
-                  //             );
-                  //             break;
-                  //           case UpiIndiaResponseError.USER_CANCELLED:
-                  //             return Text(
-                  //               'It seems like you cancelled the transaction.',
-                  //             );
-                  //             break;
-                  //           case UpiIndiaResponseError.NULL_RESPONSE:
-                  //             return Text(
-                  //               'No data received',
-                  //             );
-                  //             break;
-                  //             UpiIndiaResponse _upiResponse;
-                  //             _upiResponse = UpiIndiaResponse(snapshot.data);
-                  //             String txnId = _upiResponse.transactionId;
-                  //             String resCode = _upiResponse.responseCode;
-                  //             String txnRef = _upiResponse.transactionRefId;
-                  //             String status = _upiResponse.status;
-                  //             String approvalRef = _upiResponse.approvalRefNo;
-                  //             return Column(
-                  //               mainAxisAlignment:
-                  //                   MainAxisAlignment.spaceEvenly,
-                  //               children: <Widget>[
-                  //                 Text('Transaction Id: $txnId'),
-                  //                 Text('Response Code: $resCode'),
-                  //                 Text('Reference Id: $txnRef'),
-                  //                 Text('Status: $status'),
-                  //                 Text('Approval No: $approvalRef'),
-                  //               ],
-                  //             );
-                  //         }
-                  //       }
-                  //     }),
+                
                 ]),
               )),
-          // bottomSheet: Container(
-
-          //   child:
-          // )
+   
         ));
   }
+
+ 
+
 }

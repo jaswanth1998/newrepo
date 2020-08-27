@@ -8,20 +8,21 @@ class ResultOfAppotimentm extends StatelessWidget {
 
   MainAppotimentModel basicDetails;
   ResultOfAppotimentm({this.upiResponse, this.basicDetails}) {
-    DataBaseServices().mainTransactionOfAppotiment(
-        this.basicDetails.doctorUid,
-        this.basicDetails.doctorName,
-        this.basicDetails.patientUid,
-        this.basicDetails.patientName,
-        this.basicDetails.patientNum,
-        this.upiResponse.transactionId,
-        this.upiResponse.responseCode,
-        this.upiResponse.transactionRefId,
-        this.upiResponse.status,
-        this.upiResponse.approvalRefNo,
-        this.basicDetails.appotimentSlot,
-        this.basicDetails.patientAge,
-        this.basicDetails.patientGender);
+    // DataBaseServices().mainTransactionOfAppotiment(
+    //     this.basicDetails.doctorUid,
+    //     this.basicDetails.doctorName,
+    //     this.basicDetails.patientUid,
+    //     this.basicDetails.patientName,
+    //     this.basicDetails.patientNum,
+    //     this.upiResponse.transactionId,
+        
+        
+        
+        
+    //     this.basicDetails.appotimentSlot,
+    //     this.basicDetails.patientAge,
+    //     this.basicDetails.patientGender
+    //     );
   }
 
   @override

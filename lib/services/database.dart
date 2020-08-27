@@ -109,13 +109,12 @@ class DataBaseServices {
       String getpatientName,
       String getpatientNum,
       String txnId,
-      String resCode,
-      String txnRef,
-      String status,
-      String approvalRef,
       String appotimentSlot,
       int patientAge,
-      String patientGender) async {
+      String patientGender,
+      
+      
+      ) async {
     print("iam in transtion state");
     return await appointementRefrence.add({
       "Doctor User ID": getDoctorUid,
@@ -125,15 +124,12 @@ class DataBaseServices {
       "paatient Num": getpatientNum,
       "refund": false,
       "txnId": txnId,
-      "resCode": resCode,
-      "txnRef": txnRef,
-      "status": status,
-      "token": 0,
-      "approvalRef": approvalRef,
+      "token": 0,      
       "CompletedAt": FieldValue.serverTimestamp(),
       "appotimentSlot":appotimentSlot,
       "patient age":patientAge,
-      "patient gender":patientGender
+      "patient gender":patientGender,
+      "status":"success"
     });
   }
 

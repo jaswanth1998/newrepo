@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:getit/screens/BookAppotiment/DetailsOfApp.dart';
+import 'package:getit/screens/BookAppotiment/rasarit.dart';
 
 
 
@@ -54,7 +55,7 @@ class _MyAppState extends State<MyApp> {
     // TODO: implement build
     return  MaterialApp(
             debugShowCheckedModeBanner: false,
-            // home: DetailsOfApp(),
+            // home: Rasarit(),
         home:ShowSplash(),
           routes: <String, WidgetBuilder>{
       '/authScren': (BuildContext context) => new Auth(),
