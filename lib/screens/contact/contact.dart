@@ -17,7 +17,7 @@ class _ContactUserState extends State<ContactUser> {
             SizedBox(height:10),
             Text("For any further queries contact us on"),
             RaisedButton(onPressed: ()=>{
-              launch("tel://9160024989")
+              launch("tel://7989836033")
             },
             child:Text("call us"))
           ]

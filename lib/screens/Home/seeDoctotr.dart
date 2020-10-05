@@ -82,7 +82,10 @@ class _SeeDoctorState extends State<SeeDoctor> {
                   phoneNo: useData["phone"],
                   specialization: useData["specialization"],
                   gender: useData["gender"],
-                  qualificition: useData["Qualificition"]);
+                  qualificition: useData["Qualificition"],
+                  doctorFee: useData["doctorFee"]
+                  );
+                  
             })).toList();
 
             return SingleChildScrollView(

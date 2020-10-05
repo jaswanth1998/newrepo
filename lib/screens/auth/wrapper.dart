@@ -4,6 +4,7 @@ import 'package:getit/screens/Home/home.dart';
 import 'package:getit/screens/Registration/registrationOfUser.dart';
 import 'package:getit/screens/auth/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:getit/screens/auth/phoneAuthIt.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -40,7 +41,7 @@ class _WrapperState extends State<Wrapper> {
                   try {
                     if (snapshot.data == null) {
                       
-                      return Auth();
+                      return PhoneAuth();
                     } else {
                       Future<SharedPreferences> setData =
                           SharedPreferences.getInstance();
@@ -55,7 +56,7 @@ class _WrapperState extends State<Wrapper> {
                       );
                     }
                   } catch (e) {
-                    return Auth();
+                    return PhoneAuth();
                   }
                 }));
   }

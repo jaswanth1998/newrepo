@@ -50,7 +50,7 @@ class _RasaritState extends State<Rasarit> {
 
   void openCheckout() async {
     var options = {
-      'key': 'rzp_test_MjfjZVsokhFFbG',
+      'key': 'rzp_test_8IbZwSARRQ1LA4',
       'amount': 1000,
       'name': 'Acme Corp.',
       'description': 'Fine T-Shirt',

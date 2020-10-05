@@ -12,6 +12,7 @@ class DoctorUserModel {
   String phoneNo;
   String specialization;
   String qualificition;
+  int doctorFee;
   DoctorUserModel({
     this.doctorDocumentId,
     this.doctorDocumentName,
@@ -25,6 +26,7 @@ class DoctorUserModel {
     this.phoneNo,
     this.specialization,
     this.gender,
-    this.qualificition
+    this.qualificition,
+    this.doctorFee
   });
 }

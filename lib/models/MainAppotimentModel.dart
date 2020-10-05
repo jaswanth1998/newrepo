@@ -13,6 +13,7 @@ class MainAppotimentModel{
  String hostipalName;
  String appotimentSlot;
  String patientGender;
+ int doctorFee;
 
  MainAppotimentModel({
    this.doctorName,
@@ -24,7 +25,8 @@ class MainAppotimentModel{
    this.patientAge,
    this.hostipalName,
    this.appotimentSlot = "Morning",
-   this.patientGender
+   this.patientGender,
+   this.doctorFee
    
    
  });

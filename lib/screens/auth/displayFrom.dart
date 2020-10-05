@@ -128,7 +128,7 @@ class _DisplayFromState extends State<DisplayFrom> {
                         if (_formkey100.currentState.validate()) {
                           final FirebaseAuth _auth = FirebaseAuth.instance;
                           try {
-                            AuthResult user = await FirebaseAuth.instance
+                            UserCredential user = await FirebaseAuth.instance
                                 .signInWithEmailAndPassword(
                                     email: this.emailOfUser,
                                     password: this.pass);

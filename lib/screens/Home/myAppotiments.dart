@@ -78,10 +78,10 @@ class _MyAppotimentsState extends State<MyAppotiments> {
                           Text(appotiment.datenow + "\n",
                           style: TextStyle(fontSize: 21)),
                           appotiment.tokenNum == 0
-                              ? Text("token Number " +
+                              ? Text("Token Number " +
                                   appotiment.tokenNum.toString(),
                                   style: TextStyle(fontSize: 21))
-                              : Text("Your token Number " +
+                              : Text("Your Token Number " +
                                   appotiment.tokenNum.toString(),
                                 
               style: TextStyle(fontSize: 21)

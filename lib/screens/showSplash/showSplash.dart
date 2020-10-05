@@ -13,7 +13,7 @@ class _ShowSplashState extends State<ShowSplash> {
   }
 
   void navigationPage() {
-    Navigator.of(context).pushReplacementNamed('/wrapper');
+    Navigator.of(context).popAndPushNamed('/wrapper');
   }
 
   @override
@@ -28,7 +28,7 @@ class _ShowSplashState extends State<ShowSplash> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        color: Color.fromRGBO(0, 152, 207, 1),
+        color: Color.fromRGBO(255, 255, 255, 1),
         child: Center(
             heightFactor: double.infinity,
             child: ListView(
@@ -40,7 +40,7 @@ class _ShowSplashState extends State<ShowSplash> {
               style: TextStyle(color: Colors.white, fontSize: 32),
               textAlign: TextAlign.center,
             ),
-            new Image.asset('assests/splash.gif'),
+            new Image.asset('assests/icon.png'),
             Text(
               "Doctor Guru",
               style: TextStyle(color: Colors.white, fontSize: 32),

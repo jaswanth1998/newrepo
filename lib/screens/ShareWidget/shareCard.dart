@@ -100,6 +100,7 @@ class ShareCard extends StatelessWidget {
                                                 patientUid: this.sendPatientUid,
                                                 hostipalName:
                                                     this.useModel.hospital,
+                                                    doctorFee: useModel.doctorFee
                                               ),
                                             )))
                               });

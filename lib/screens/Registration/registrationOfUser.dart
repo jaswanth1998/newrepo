@@ -133,7 +133,7 @@ class _RegistrationOfUserState extends State<RegistrationOfUser> {
                                 city = newValue;
                               });
                             },
-                            items: <String>['Kadapa', 'mydukur', 'proddatur']
+                            items: <String>['Kadapa', 'Mydukur', 'proddatur']
                                 .map<DropdownMenuItem<String>>((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
@@ -145,7 +145,7 @@ class _RegistrationOfUserState extends State<RegistrationOfUser> {
                       ],
                     ),
                     TextFormField(
-                      decoration: textInputDecarator.copyWith(hintText: "age"),
+                      decoration: textInputDecarator.copyWith(hintText: "Age"),
                       validator: (val) => val.length > 2 || val.length == 0
                           ? 'Enter correct age'
                           : null,

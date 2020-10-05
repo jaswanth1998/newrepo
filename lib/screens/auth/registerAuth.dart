@@ -133,7 +133,7 @@ class _RegisterFromAuthState extends State<RegisterFromAuth> {
 
                         final FirebaseAuth _auth = FirebaseAuth.instance;
 
-                        AuthResult result =
+                        UserCredential result =
                             await _auth.createUserWithEmailAndPassword(
                                 email: this.phoneNum, password: this.pass);
                         try {

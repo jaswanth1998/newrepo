@@ -34,6 +34,9 @@ class _CatgageryState extends State<Catgagery> {
     "Psychology",
     "Cardiology",
     "Physiology",
+    "Dentist",
+"Dermotology",
+"Homeopathy"
   ];
   // List<Color> useColor = [Colors.red,Colors.blue];
   String dropdownValue = 'Kadapa';
@@ -66,7 +69,7 @@ class _CatgageryState extends State<Catgagery> {
               this.serachCity = newValue;
             });
           },
-          items: <String>['Kadapa', 'mydukur', 'proddatur']
+          items: <String>['Kadapa', 'Mydukur', 'proddatur']
               .map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(
               value: value,

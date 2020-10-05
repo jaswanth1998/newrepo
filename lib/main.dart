@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:getit/screens/BookAppotiment/DetailsOfApp.dart';
 import 'package:getit/screens/BookAppotiment/rasarit.dart';
 
-
+// Import the firebase_core plugin
+import 'package:firebase_core/firebase_core.dart';
 
 
 
@@ -52,6 +53,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+      // Create the initialization Future outside of `build`:
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
     // TODO: implement build
     return  MaterialApp(
             debugShowCheckedModeBanner: false,

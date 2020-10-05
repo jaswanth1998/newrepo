@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:upi_india/upi_india.dart';
 
 class UpiTranstionService {
-  Future _transaction;
+  // Future _transaction;
   String doctorUserID;
   String patientUid;
   String patientName;

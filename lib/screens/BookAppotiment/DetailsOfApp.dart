@@ -9,12 +9,9 @@ import 'package:upi_india/upi_india.dart';
 
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
-
 import 'package:flutter/services.dart';
 
 import 'package:razorpay_flutter/razorpay_flutter.dart';
-
-
 
 class DetailsOfApp extends StatefulWidget {
   MainAppotimentModel basicDetails;
@@ -25,7 +22,7 @@ class DetailsOfApp extends StatefulWidget {
 }
 
 class _DetailsOfAppState extends State<DetailsOfApp> {
-   static const platform = const MethodChannel("razorpay_flutter");
+  static const platform = const MethodChannel("razorpay_flutter");
 
   Razorpay _razorpay;
   // String selectedSlot = "Morning";
@@ -33,18 +30,11 @@ class _DetailsOfAppState extends State<DetailsOfApp> {
   MainAppotimentModel basicDetails;
   bool isMorning = true;
   bool isMale = true;
-  
 
   _DetailsOfAppState({this.basicDetails});
   Future _transaction;
 
-
-
- 
-
-
-
- @override
+  @override
   void initState() {
     super.initState();
     _razorpay = Razorpay();
@@ -59,20 +49,19 @@ class _DetailsOfAppState extends State<DetailsOfApp> {
     _razorpay.clear();
   }
 
-  void openCheckout(amount) async {
+  void openCheckout(amount, phoneNum) async {
     var options = {
-      'key': 'rzp_test_MjfjZVsokhFFbG',
+      'key': 'rzp_test_8IbZwSARRQ1LA4',
       'amount': amount,
       'name': 'Acme Corp.',
       'description': 'Fine T-Shirt',
-      'prefill': {'contact': '9160024989', 'email': 'jaswanthtata@gmail.com'},
+      'prefill': {'contact': phoneNum, 'email': 'doctorguru@gmail.com'},
       'external': {
         'wallets': ['paytm']
       }
     };
 
     try {
-      
       _razorpay.open(options);
       print("sucess");
     } catch (e) {
@@ -85,48 +74,39 @@ class _DetailsOfAppState extends State<DetailsOfApp> {
     print("i am sucess response");
     print(response.paymentId);
 
-  DataBaseServices().mainTransactionOfAppotiment(
-     this.basicDetails.doctorUid,
+    DataBaseServices().mainTransactionOfAppotiment(
+        this.basicDetails.doctorUid,
         this.basicDetails.doctorName,
         this.basicDetails.patientUid,
         this.basicDetails.patientName,
         this.basicDetails.patientNum,
         response.paymentId,
-        
-        
-        
-        
         this.basicDetails.appotimentSlot,
         this.basicDetails.patientAge,
         this.basicDetails.patientGender,
-        
-  );
-   Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>
-                
-                 MyAppotiments(
-                  userId: this.basicDetails.patientUid,
-                ),
-                // settings: RouteSettings(
-                //   arguments: [catgary[index],this.userid],
-                // ),
-              ),
-            );
-  
+        this.basicDetails.doctorFee);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MyAppotiments(
+          userId: this.basicDetails.patientUid,
+        ),
+        // settings: RouteSettings(
+        //   arguments: [catgary[index],this.userid],
+        // ),
+      ),
+    );
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
     print("i am  response");
-   print(response);
+    print(response);
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
     print("i am  handle response");
-print(response);
+    print(response);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -151,9 +131,9 @@ print(response);
               key: _formkey11,
               child: SingleChildScrollView(
                 child: Column(children: <Widget>[
-                  Text("You are booking with " +
+                  Text("You are Booking with " +
                       this.basicDetails.hostipalName +
-                      " of doctor " +
+                      " of Doctor " +
                       this.basicDetails.doctorName),
                   SizedBox(height: 10),
                   TextFormField(
@@ -184,7 +164,7 @@ print(response);
                           val.length <= 1 ? "Enter Your age" : null,
                       keyboardType: TextInputType.number,
                       decoration: new InputDecoration(
-                        hintText: "age",
+                        hintText: "Age",
                         border: new OutlineInputBorder(
                           borderRadius: const BorderRadius.all(
                             const Radius.circular(25.0),
@@ -209,7 +189,7 @@ print(response);
                         ),
                       )),
                   SizedBox(height: 10),
-                  Text("Select slot"),
+                  Text("Select Slot"),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
@@ -312,7 +292,10 @@ print(response);
 
                   Column(
                     children: <Widget>[
-                      SizedBox(height: 100),
+                      SizedBox(height: 10),
+                      Text("Note: The amount charged is for the service. There is not self-cancellation of the booking. The amount will be refunded if the booking is canceled from the Doctor's end.", textAlign: TextAlign.center,),
+                      SizedBox(height: 10),
+
                       Text(getDate),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -340,7 +323,8 @@ print(response);
                               shape: RoundedRectangleBorder(
                                   borderRadius: new BorderRadius.circular(18.0),
                                   side: BorderSide(color: Colors.black)),
-                              child: Text("Book"),
+                              child: Text("Pay " +
+                                  this.basicDetails.doctorFee.toString()),
                               onPressed: () async {
                                 if (_formkey11.currentState.validate()) {
                                   print("i am basic details");
@@ -354,17 +338,21 @@ print(response);
                                       " " +
                                       this.basicDetails.patientUid);
                                   print("i am basic details");
-                                  if(this.isMale){
+                                  if (this.isMale) {
                                     this.basicDetails.patientGender = "Male";
-                                  }else{
-                                   this.basicDetails.patientGender = "Female"; 
+                                  } else {
+                                    this.basicDetails.patientGender = "Female";
                                   }
-                                  if(this.isMorning){
-                                    this.basicDetails.appotimentSlot = "Morning";
-                                  }else{
-                                   this.basicDetails.appotimentSlot = "Evening"; 
+                                  if (this.isMorning) {
+                                    this.basicDetails.appotimentSlot =
+                                        "Morning";
+                                  } else {
+                                    this.basicDetails.appotimentSlot =
+                                        "Evening";
                                   }
-                                  openCheckout(2000);
+                                  openCheckout(
+                                      this.basicDetails.doctorFee * 100,
+                                      this.basicDetails.patientNum);
                                   // Navigator.push(
                                   //     context,
                                   //     MaterialPageRoute(
@@ -377,14 +365,8 @@ print(response);
                           ])
                     ],
                   ),
-
-                
                 ]),
               )),
-   
         ));
   }
-
- 
-
 }

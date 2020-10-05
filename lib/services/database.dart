@@ -17,7 +17,7 @@ class DataBaseServices {
   //Brew list from sanpshot
   _brewListFormQuesrySanpshot(QuerySnapshot snapshot) {
     snapshot.documents.map((doc) {
-      print(doc.data["Age"]);
+      print(doc.data()["data"]["Age"]);
     }).toList();
     //  return  snapshot.documents.map((doc) {
     //     print(doc.data);
@@ -112,6 +112,7 @@ class DataBaseServices {
       String appotimentSlot,
       int patientAge,
       String patientGender,
+      int paymentFee
       
       
       ) async {
@@ -129,7 +130,8 @@ class DataBaseServices {
       "appotimentSlot":appotimentSlot,
       "patient age":patientAge,
       "patient gender":patientGender,
-      "status":"success"
+      "status":"success",
+      "paymentFee":paymentFee
     });
   }
 

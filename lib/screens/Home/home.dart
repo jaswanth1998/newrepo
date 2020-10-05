@@ -76,19 +76,19 @@ class _HomeState extends State<Home> {
                      Future<SharedPreferences> setData = SharedPreferences.getInstance();
               setData.then(
                 (data)=>{
-                  data.setString("patient name", snapshot.data.data["first Name"]),
-                  data.setString("patient phoneNum", snapshot.data.data["phone Num"]),
+                  data.setString("patient name", snapshot.data.data()["data"]["first Name"]),
+                  data.setString("patient phoneNum", snapshot.data.data()["data"]["phone Num"]),
                   
 
                 }
               );
                     
-                print(snapshot.data.data["first Name"]);
+                print(snapshot.data.data()["data"]["first Name"]);
                 // return testScreen();
                 return Catgagery(
                   userid: this.userid,
-                  userName: snapshot.data.data["first Name"],
-                  sarchCity: snapshot.data.data["city"],
+                  userName: snapshot.data.data()["data"]["first Name"],
+                  sarchCity: snapshot.data.data()["data"]["city"],
 
                 );
               } else {

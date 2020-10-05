@@ -45,26 +45,26 @@ class _EditProfileState extends State<EditProfile> {
           title: Text("Edit Profile"),
         ),
         body: StreamBuilder(
-            stream: Firestore.instance
+            stream: FirebaseFirestore.instance
                 .collection("Users")
-                .document(this.userid)
+                .doc(this.userid)
                 .snapshots(),
             builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
               
               if (snapshot.hasData) {
 
 
-          this.firstName  = snapshot.data.data["first Name"];
+          this.firstName  = snapshot.data.data()["data"]["first Name"];
 
-          this.lastName = snapshot.data.data["Last Name"];
+          this.lastName = snapshot.data.data()["data"]["Last Name"];
 
-          this.age = snapshot.data.data["age"];
+          this.age = snapshot.data.data()["data"]["age"];
 
-          this.gender  = snapshot.data.data["gender"];
+          this.gender  = snapshot.data.data()["data"]["gender"];
 
-          this.city = snapshot.data.data["city"];
+          this.city = snapshot.data.data()["data"]["city"];
 
-          this.phoneNum = snapshot.data.data["phone Num"];
+          this.phoneNum = snapshot.data.data()["data"]["phone Num"];
 
                return SingleChildScrollView(
                   child: Column(
@@ -111,7 +111,7 @@ class _EditProfileState extends State<EditProfile> {
                                 TextFormField(
                                   initialValue: this.age.toString(),
                                   decoration: textInputDecarator.copyWith(
-                                      hintText: "age"),
+                                      hintText: "Age"),
                                   validator: (val) =>
                                       val.length > 2 || val.length == 0
                                           ? 'Enter correct age'

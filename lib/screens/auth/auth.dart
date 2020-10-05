@@ -20,17 +20,17 @@ class _AuthState extends State<Auth> {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          color: Color.fromRGBO(41, 152, 255, 0.8100000023841858),
+          color: Color.fromRGBO(255, 255, 255, 1),
         ),
         child: Column(
           children: <Widget>[
-            SizedBox(height: 40),
+             SizedBox(height: 40),
             Text(
               "Welcome to  Doctor's Token",
               style: TextStyle(fontSize: 34, color: Colors.white),
               textAlign: TextAlign.center,
             ),
-            // new Image.asset('assests/splash.gif')
+            new Image.asset('assests/icon.png')
           ],
         ),
       ),
