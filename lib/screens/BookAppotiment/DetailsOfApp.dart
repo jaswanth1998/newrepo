@@ -2,7 +2,7 @@
 
 import 'dart:convert';
 
-import 'package:cashfree_pg/cashfree_pg.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:getit/models/MainAppotimentModel.dart';
@@ -55,97 +55,67 @@ class _DetailsOfAppState extends State<DetailsOfApp> {
     _razorpay.clear();
   }
 
-  // void openCheckout(amount, phoneNum) async {
-  //   var options = {
-  //     'key': 'rzp_test_8IbZwSARRQ1LA4',
-  //     'amount': amount,
-  //     'name': 'Acme Corp.',
-  //     'description': 'Fine T-Shirt',
-  //     'prefill': {'contact': phoneNum, 'email': 'doctorguru@gmail.com'},
-  //     'external': {
-  //       'wallets': ['paytm']
-  //     }
-  //   };
-
-  //   try {
-  //     _razorpay.open(options);
-  //     print("sucess");
-  //   } catch (e) {
-  //     print("i am catch");
-  //     debugPrint(e);
-  //   }
-  // }
-
   void openCheckout(amount, phoneNum) async {
-var response  =     await  http.post("http://34.87.152.11:5001/first-website-48486/us-central1/getPaymentToken?amount=10",body: {
-"amount":amount.toString()
-    });
-    print("i am response");
-   var responseJson =  jsonDecode(response.body);
-   if(responseJson["status"]=="SUCCESS"){
- String stage = "TEST";
-    String orderId = responseJson["orderId"].toString();
-    String orderAmount = amount.toString();
-    String tokenData = responseJson["token"];
-    String customerName = "Customer Name";
-    String orderNote = "Order Note";
-    String orderCurrency = "INR";
-    String appId = "403163baeaec68acd2f8e06fb61304";
-    String customerPhone = "9999999999";
-    String customerEmail = "sample@gmail.com";
-    String notifyUrl = "https://test.gocashfree.com/notify";
-
-    Map<String, dynamic> inputParams = {
-      "orderId": orderId,
-      "orderAmount": orderAmount,
-      "customerName": customerName,
-      "orderNote": orderNote,
-      "orderCurrency": orderCurrency,
-      "appId": appId,
-      "customerPhone": customerPhone,
-      "customerEmail": customerEmail,
-      "stage": stage,
-      "notifyUrl": notifyUrl,
-      "tokenData":tokenData
+    var options = {
+      'key': 'rzp_test_8IbZwSARRQ1LA4',
+      'amount': amount,
+      'name': 'Acme Corp.',
+      'description': 'Fine T-Shirt',
+      'prefill': {'contact': phoneNum, 'email': 'doctorguru@gmail.com'},
+      'external': {
+        'wallets': ['paytm']
+      }
     };
 
-    CashfreePGSDK.doPayment(inputParams)
-        .then((value) => 
-        {value?.forEach((key, value) {
-
-              print("$key : $value");
-              //Do something with the result
-            }),
-           if( value["txStatus"]=="SUCCESS"){
-              DataBaseServices().mainTransactionOfAppotiment(
-        this.basicDetails.doctorUid,
-        this.basicDetails.doctorName,
-        this.basicDetails.patientUid,
-        this.basicDetails.patientName,
-        this.basicDetails.patientNum,
-        responseJson["orderId"].toString(),
-        this.basicDetails.appotimentSlot,
-        this.basicDetails.patientAge,
-        this.basicDetails.patientGender,
-        this.basicDetails.doctorFee),
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => MyAppotiments(
-          userId: this.basicDetails.patientUid,
-        ),
-        // settings: RouteSettings(
-        //   arguments: [catgary[index],this.userid],
-        // ),
-      ),
-    ),
-
-           }
-            
-            });
-   }
-
+    try {
+      _razorpay.open(options);
+      print("sucess");
+    } catch (e) {
+      print("i am catch");
+      debugPrint(e);
+    }
   }
+
+//   void openCheckout(amount, phoneNum) async {
+// var response  =     await  http.post("http://34.87.152.11:5001/first-website-48486/us-central1/getPaymentToken?amount=10",body: {
+// "amount":amount
+//     });
+//     print("i am response");
+//    var responseJson =  jsonDecode(response.body);
+//    if(responseJson["status"])
+//  String stage = "TEST";
+//     String orderId = responseJson["orderId"];
+//     String orderAmount = amount.toString();
+//     String tokenData = responseJson["token"];
+//     String customerName = "Customer Name";
+//     String orderNote = "Order Note";
+//     String orderCurrency = "INR";
+//     String appId = "403163baeaec68acd2f8e06fb61304";
+//     String customerPhone = "9999999999";
+//     String customerEmail = "sample@gmail.com";
+//     String notifyUrl = "https://test.gocashfree.com/notify";
+
+//     Map<String, dynamic> inputParams = {
+//       "orderId": orderId,
+//       "orderAmount": orderAmount,
+//       "customerName": customerName,
+//       "orderNote": orderNote,
+//       "orderCurrency": orderCurrency,
+//       "appId": appId,
+//       "customerPhone": customerPhone,
+//       "customerEmail": customerEmail,
+//       "stage": stage,
+//       "notifyUrl": notifyUrl,
+//       "tokenData":tokenData
+//     };
+
+//     CashfreePGSDK.doPayment(inputParams)
+//         .then((value) => value?.forEach((key, value) {
+//               print("$key : $value");
+//               //Do something with the result
+//             }));
+
+//   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     print("i am sucess response");
@@ -162,7 +132,7 @@ var response  =     await  http.post("http://34.87.152.11:5001/first-website-484
         this.basicDetails.patientAge,
         this.basicDetails.patientGender,
         this.basicDetails.doctorFee);
-    Navigator.push(
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (context) => MyAppotiments(
@@ -428,7 +398,7 @@ var response  =     await  http.post("http://34.87.152.11:5001/first-website-484
                                         "Evening";
                                   }
                                   openCheckout(
-                                      this.basicDetails.doctorFee ,
+                                      this.basicDetails.doctorFee * 100,
                                       this.basicDetails.patientNum);
                                   // Navigator.push(
                                   //     context,
