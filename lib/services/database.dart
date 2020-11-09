@@ -7,17 +7,17 @@ class DataBaseServices {
   String getCatgary;
   DataBaseServices({this.getCatgary});
   final CollectionReference doctorsRference =
-      Firestore.instance.collection("Users");
+      FirebaseFirestore.instance.collection("Users");
   final CollectionReference appointementRefrence =
-      Firestore.instance.collection("Appotiments");
+      FirebaseFirestore.instance.collection("Appotiments");
 
   final CollectionReference liveTokenRefrence =
-      Firestore.instance.collection("LiveToken");
+      FirebaseFirestore.instance.collection("LiveToken");
 
   //Brew list from sanpshot
   _brewListFormQuesrySanpshot(QuerySnapshot snapshot) {
-    snapshot.documents.map((doc) {
-      print(doc.data()["data"]["Age"]);
+    snapshot.docs.map((doc) {
+      print(doc.data()["Age"]);
     }).toList();
     //  return  snapshot.documents.map((doc) {
     //     print(doc.data);
@@ -39,15 +39,15 @@ class DataBaseServices {
   // }
   bool getData() {
     print("I am here");
-    doctorsRference.getDocuments().then((QuerySnapshot snapshot) {
-      snapshot.documents.forEach((f) => print('${f.data}}'));
+    doctorsRference.get().then((QuerySnapshot snapshot) {
+      snapshot.docs.forEach((f) => print('${f.data}}'));
       return true;
     });
   }
 
   Future registerUser(String uId, String firstName, String lastName, int age,
       String gender, String city , String phoneNum,String userNotificationToken) async {
-    return await doctorsRference.document(uId).setData({
+    return await doctorsRference.doc(uId).set({
       "userUid": uId,
       "first Name": firstName,
       "Last Name": lastName,

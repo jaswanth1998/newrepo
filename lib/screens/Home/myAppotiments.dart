@@ -34,7 +34,7 @@ class _MyAppotimentsState extends State<MyAppotiments> {
         ),
         body: TabBarView(children: [
           StreamBuilder(
-            stream: Firestore.instance
+            stream: FirebaseFirestore.instance
                 .collection("Appotiments")
                 .where("Patent Uid", isEqualTo: userId)
                 .where("status", isEqualTo: "success")
@@ -48,7 +48,7 @@ class _MyAppotimentsState extends State<MyAppotiments> {
               }
               var userDocument = snapshot;
 
-              this.data = (userDocument.data.documents.map((useData) {
+              this.data = (userDocument.data.docs.map((useData) {
                 return AppotimentModel(
                     useData["status"], useData["CompletedAt"],
                     doctorName: useData["Doctor Name"],
@@ -93,7 +93,7 @@ class _MyAppotimentsState extends State<MyAppotiments> {
 
                           appotiment.doctorid.length > 0
                               ? StreamBuilder(
-                                  stream: Firestore.instance
+                                  stream: FirebaseFirestore.instance
                                       .collection("LiveToken")
                                       .where("Uid",
                                           isEqualTo: appotiment.doctorid)
@@ -107,7 +107,7 @@ class _MyAppotimentsState extends State<MyAppotiments> {
                                     if (!snapshot.hasData) {
                                       return Text("No Data found");
                                     } else {
-                                      this.data1 = (userDocument.data.documents
+                                      this.data1 = (userDocument.data.docs
                                           .map((useData) {
                                         print("iam doc2");
                                         check = useData["Token"];
@@ -133,7 +133,7 @@ class _MyAppotimentsState extends State<MyAppotiments> {
             },
           ),
           StreamBuilder(
-            stream: Firestore.instance
+            stream: FirebaseFirestore.instance
                 .collection("Appotiments")
                 .where("Patent Uid", isEqualTo: userId)
                 .where("status", isEqualTo: "success")
@@ -149,7 +149,7 @@ class _MyAppotimentsState extends State<MyAppotiments> {
               }
               var userDocument = snapshot;
 
-              this.data = (userDocument.data.documents.map((useData) {
+              this.data = (userDocument.data.docs.map((useData) {
                 return AppotimentModel(
                     useData["status"], useData["CompletedAt"],
                     doctorName: useData["Doctor Name"],
@@ -195,7 +195,7 @@ class _MyAppotimentsState extends State<MyAppotiments> {
 
                           appotiment.doctorid.length > 0
                               ? StreamBuilder(
-                                  stream: Firestore.instance
+                                  stream: FirebaseFirestore.instance
                                       .collection("LiveToken")
                                       .where("Uid",
                                           isEqualTo: appotiment.doctorid)
@@ -211,7 +211,7 @@ class _MyAppotimentsState extends State<MyAppotiments> {
               style: TextStyle(fontSize: 21)
                                       );
                                     } else {
-                                      this.data1 = (userDocument.data.documents
+                                      this.data1 = (userDocument.data.docs
                                           .map((useData) {
                                         print("iam doc2");
                                         check = useData["Token"];

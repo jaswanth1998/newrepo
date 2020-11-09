@@ -17,7 +17,7 @@ class LiveToken extends StatelessWidget {
           
 
 
-          stream: Firestore.instance.collection("Appotiments")
+          stream: FirebaseFirestore.instance.collection("Appotiments")
 
         .where("Uid",isEqualTo: userId)
         .where("status",isEqualTo:"success")

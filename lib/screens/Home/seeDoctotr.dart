@@ -48,7 +48,7 @@ class _SeeDoctorState extends State<SeeDoctor> {
     return Scaffold(
       appBar: AppBar(title: Text("Doctors")),
       body: StreamBuilder(
-          stream: Firestore.instance
+          stream: FirebaseFirestore.instance
               .collection('Users')
               .where(
                 "Doctor",
@@ -63,15 +63,15 @@ class _SeeDoctorState extends State<SeeDoctor> {
               print("Loading");
               return Text("Loading");
             }
-            if (snapshot.data.documents.length == 0) {
+            if (snapshot.data.docs.length == 0) {
               print("Loading");
               return Center(child: Text("No Doctors available"));
             }
             var userDocument = snapshot;
 
-            this.data = (userDocument.data.documents.map((useData) {
+            this.data = (userDocument.data.docs.map((useData) {
               return DoctorUserModel(
-                  doctorDocumentId: useData.documentID,
+                  doctorDocumentId: useData.id,
                   age: useData["Age"],
                   experience: useData["Experience"],
                   firstname: useData["First name"],

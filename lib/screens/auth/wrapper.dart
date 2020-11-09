@@ -34,8 +34,8 @@ class _WrapperState extends State<Wrapper> {
         // appBar: AppBar(),
         body:
             // );
-            StreamBuilder<FirebaseUser>(
-                stream: FirebaseAuth.instance.onAuthStateChanged,
+            StreamBuilder<User>(
+                stream: FirebaseAuth.instance.authStateChanges(),
                 builder: (context, snapshot) {
                   // print(snapshot.data.uid);
                   try {

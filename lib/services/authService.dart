@@ -87,12 +87,12 @@ print("done");
     print(code);
     print("verificationid");
     print(this.verificationId);
-    AuthCredential credential1 = PhoneAuthProvider.getCredential(
+    AuthCredential credential1 = PhoneAuthProvider.credential(
         verificationId: this.verificationId, smsCode: code);
     print("i am auth");
     print(credential1);
     try {
-      final FirebaseUser user =
+      final User user =
           (await _auth.signInWithCredential(credential1)).user;
       print(user.uid + "Uid");
     } catch (e) {
