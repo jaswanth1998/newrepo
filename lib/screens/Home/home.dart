@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:getit/screens/Home/catgary.dart';
+import 'package:getit/screens/Home/notifyitmsg.dart';
 import 'package:getit/screens/Home/showDrawer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:getit/screens/Home/testScreen.dart';
@@ -66,7 +67,9 @@ class _HomeState extends State<Home> {
       //   print("i am value"),
       //   print(jsonDecode(value.body)["cftoken"])
       // });
+      notifyItmsg().startNotify();
     } catch (e) {
+      print("i am error");
       print(e);
       return Wrapper();
     }
